@@ -1,0 +1,24 @@
+{
+  "name": "qr-generator",
+  "version": "1.0.0",
+  "description": "🌙 Built during night coding sessions",
+  "main": "src/index.html",
+  "scripts": {
+    "dev": "live-server src --port=3000",
+    "build": "echo 'Build process here'",
+    "test": "echo 'Tests here'",
+    "format": "prettier --write .",
+    "lint": "echo 'Linting here'"
+  },
+  "keywords": ["night-coding", "vanilla-js", "web-development"],
+  "author": "DiegoMGE",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DiegoMGE/qr-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DiegoMGE/qr-generator/issues"
+  },
+  "homepage": "https://github.com/DiegoMGE/qr-generator#readme"
+}
