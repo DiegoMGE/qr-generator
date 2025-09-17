@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📱 QR Generator Pro | Night Coding Project</title>
+    <meta name="description" content="Advanced QR Code Generator with analytics. Built during night coding sessions.">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="assets/icons/qr-icon.svg" type="image/svg+xml">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <h1>📱 QR Generator Pro</h1>
+                <p>Built during night coding sessions 🌙</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Input Section -->
+                <section class="input-section">
+                    <div class="card">
+                        <h2>Generate Your QR Code</h2>
+
+                        <!-- QR Type Selector -->
+                        <div class="qr-type-selector">
+                            <button class="type-btn active" data-type="url">🔗 URL</button>
+                            <button class="type-btn" data-type="text">📝 Text</button>
+                            <button class="type-btn" data-type="wifi">📶 WiFi</button>
+                            <button class="type-btn" data-type="contact">👤 Contact</button>
+                        </div>
+
+                        <!-- Input Fields -->
+                        <div class="input-container">
+                            <!-- URL Input (default) -->
+                            <div class="input-group active" data-input="url">
+                                <label for="url-input">Enter URL:</label>
+                                <input type="url" id="url-input" placeholder="https://example.com" class="qr-input">
+                            </div>
+
+                            <!-- Text Input -->
+                            <div class="input-group" data-input="text">
+                                <label for="text-input">Enter Text:</label>
+                                <textarea id="text-input" placeholder="Your text here..." class="qr-input"></textarea>
+                            </div>
+
+                            <!-- WiFi Input -->
+                            <div class="input-group" data-input="wifi">
+                                <label for="wifi-ssid">WiFi Network Name:</label>
+                                <input type="text" id="wifi-ssid" placeholder="Network Name" class="qr-input">
+                                <label for="wifi-password">Password:</label>
+                                <input type="password" id="wifi-password" placeholder="Password" class="qr-input">
+                                <label for="wifi-security">Security:</label>
+                                <select id="wifi-security" class="qr-input">
+                                    <option value="WPA">WPA/WPA2</option>
+                                    <option value="WEP">WEP</option>
+                                    <option value="nopass">Open</option>
+                                </select>
+                            </div>
+
+                            <!-- Contact Input -->
+                            <div class="input-group" data-input="contact">
+                                <label for="contact-name">Name:</label>
+                                <input type="text" id="contact-name" placeholder="John Doe" class="qr-input">
+                                <label for="contact-phone">Phone:</label>
+                                <input type="tel" id="contact-phone" placeholder="+1234567890" class="qr-input">
+                                <label for="contact-email">Email:</label>
+                                <input type="email" id="contact-email" placeholder="john@example.com" class="qr-input">
+                            </div>
+                        </div>
+
+                        <!-- Customization Options -->
+                        <div class="customization-section">
+                            <h3>Customize QR Code</h3>
+                            <div class="custom-controls">
+                                <div class="control-group">
+                                    <label for="qr-size">Size:</label>
+                                    <input type="range" id="qr-size" min="100" max="500" value="200">
+                                    <span id="size-value">200px</span>
+                                </div>
+                                <div class="control-group">
+                                    <label for="qr-color">Color:</label>
+                                    <input type="color" id="qr-color" value="#000000">
+                                </div>
+                                <div class="control-group">
+                                    <label for="bg-color">Background:</label>
+                                    <input type="color" id="bg-color" value="#ffffff">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Output Section -->
+                <section class="output-section">
+                    <div class="card">
+                        <h2>Your QR Code</h2>
+
+                        <!-- QR Display -->
+                        <div class="qr-display">
+                            <canvas id="qr-canvas"></canvas>
+                            <div id="qr-placeholder" class="placeholder">
+                                <div class="placeholder-content">
+                                    <div class="placeholder-icon">📱</div>
+                                    <p>Enter data to generate QR code</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Download Options -->
+                        <div class="download-section">
+                            <button id="download-png" class="download-btn">📥 Download PNG</button>
+                            <button id="download-svg" class="download-btn">📄 Download SVG</button>
+                            <button id="copy-link" class="download-btn">🔗 Copy Link</button>
+                        </div>
+
+                        <!-- QR Info -->
+                        <div class="qr-info">
+                            <div class="info-item">
+                                <span class="label">Data Length:</span>
+                                <span id="data-length">0</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">QR Version:</span>
+                                <span id="qr-version">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Error Correction:</span>
+                                <span id="error-correction">M</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Analytics Section -->
+                <section class="analytics-section">
+                    <div class="card">
+                        <h2>📊 Analytics Dashboard</h2>
+                        <div class="analytics-grid">
+                            <div class="analytics-item">
+                                <div class="analytics-number" id="total-generated">0</div>
+                                <div class="analytics-label">QR Codes Generated</div>
+                            </div>
+                            <div class="analytics-item">
+                                <div class="analytics-number" id="total-downloads">0</div>
+                                <div class="analytics-label">Downloads</div>
+                            </div>
+                            <div class="analytics-item">
+                                <div class="analytics-number" id="session-time">0m</div>
+                                <div class="analytics-label">Session Time</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p>🌙 Built during night coding sessions by <a href="https://github.com/DiegoMGE"
+                        target="_blank">DiegoMGE</a></p>
+                <p>Part of my <strong>10 Projects Challenge</strong></p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/qr-generator.js"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/export.js"></script>
+    <script src="js/ui-controller.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
